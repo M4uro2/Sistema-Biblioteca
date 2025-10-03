@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carteirinha</title>
+</head>
+<body>
+
+    <div th:fragment="formCarteirinha" class="form">
+        
+            <label for="idNumero">numero da carteirinha:</label>
+            <input type="text" id="idNumero" th:field="*{numero}" placeholder="Informe o numero de sua carteirinha" required/>
+            <br>
+
+            <label for="idataEmissa">Data de emissão:</label>
+            <input type="date" id="idataEmissa" th:field="*{dataEmissao}" placeholder="Informe a data de Emissão" required/>
+            <br>
+
+            <label for="idDataValidade">validae:</label>
+            <input type="date" id="idDataValidade" th:field="*{dataNascimento}" placeholder="Informe sua data de Nascimento" required/>
+            <br>
+	        
+
+			
+            
+    </div>
+    
+</body>
+</html>

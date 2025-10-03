@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+</head>
+<body>
+    
+        <!--barra de navegação-->
+		<div th:insert="fragments/barraNavegacao :: navbar"></div>
+		
+		<br>
+		
+		<div class="form-header">
+			<h1>Editar de Aluno</h1>
+		</div>
+		<br>
+		
+		<!--formulário de cadastro-->
+		<form th:action="@{/emprestimo/edit}" th:object="${emprestimo}" method="post">
+            
+
+			<div th:insert= "fragments/formEmprestimo :: formEmprestimo"></div>
+
+            <div class="button-container">
+                <button type="submit">Salvar</button>
+
+                <button type="button" onclick="window.location.href='/emprestimo/list'">Cancelar</button>
+            </div>
+        </form>
+
+</body>
+</html>

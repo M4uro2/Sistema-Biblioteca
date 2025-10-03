@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+   <title>Fragments</title>
+   <link rel="stylesheet" th:href="@{/css/menu.css}">
+   
+</head>
+<body>
+   <div th:fragment="navbar" class="menu">
+		<div class="sidenav">
+				<a href="/">Início</a>
+				
+			<!-- menu de campus -->
+				<button class="dropdown-btn">
+                    aluno &#x25BC;
+				</button>
+				<div class="dropdown-container">
+					<!-- links para cadastrar -->
+                    <a th:href="@{/aluno/form}">Cadastrar</a> 
+					
+					<!-- links para listar -->
+                    <a	th:href="@{/aluno/list}">Listar</a>
+				</div>
+
+			<!-- menu de curso -->
+				<button class="dropdown-btn">
+                    carteirinha &#x25BC;
+				</button>
+				<div class="dropdown-container">
+					<!-- links para cadastrar -->
+                    <a th:href="@{/carteirinha/form}">Cadastrar</a> 
+					
+					<!-- links para listar -->
+                    <a	th:href="@{/carteirinha/list}">Listar</a>
+				</div>
+				
+				
+			<!-- menu de disciplina -->
+				<button class="dropdown-btn">
+					emprestimo &#x25BC;
+				</button>
+				<div class="dropdown-container">
+					<!-- links para cadastrar -->
+					<a th:href="@{/emprestimo/form}">Cadastrar</a>
+
+					<!-- links para listar -->
+					<a th:href="@{/emprestimo/list}">Listar</a>
+				</div>
+		 </div>
+
+		 <script src="/js/menu.js"></script>
+		 
+		 <div th:insert="fragments/mensagem :: message"></div>
+
+   </div>
+</body>
+</html>

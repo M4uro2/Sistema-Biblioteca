@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>listar alunos</title>
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+	<script src="/js/menu.js"></script>
+</head>
+<body>
+    <div th:insert="fragments/barraNavegacao :: navbar"></div>
+
+    <h1>LISTAR ALUNO</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Data de emprestimo</th>
+                <th>Data de devolução prevista</th>
+                <th>Data de devolução real</th>
+                <th>Status</th>
+                <th>Livro</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="emprestimo : ${emprestimos}">
+                <td th:text="${#dates.format(emprestimo.dataEmprestimo, 'dd/MM/yyyy')}"></td>
+                <td th:text="${#dates.format(emprestimo.dataDevolucaoPrevista, 'dd/MM/yyyy')}"></td>
+                <td th:text="${#dates.format(emprestimo.dataDevolucaoReal, 'dd/MM/yyyy')}"></td>
+                <td th:text="${emprestimo.status}"></td>
+                <td th:text="${emprestimo.livro}"></td>
+                <td>
+                    <a th:href="@{'/emprestimo/edit/' + ${emprestimo.id}}">Editar</a> |
+                    <a th:href="@{'/emprestimo/delete/' + ${emprestimo.id}}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	    <title>Cadastro Aluno</title>
+		<link rel="stylesheet" th:href="@{/css/menu.css}">
+		<script src="/js/menu.js"></script>
+
+	</head>
+	<body>
+		<!--barra de navegação-->
+		<div th:insert="fragments/barraNavegacao :: navbar"></div>
+		
+		<br>
+		
+		<div class="form-header">
+			<h1>Cadastro de Aluno</h1>
+		</div>
+		<br>
+		
+		<!--formulário de cadastro-->
+		
+		 <form th:action="@{/aluno/save}" th:object="${aluno}" method="post">
+            <br>
+
+          <div th:insert= "fragments/formAluno :: formAluno"></div>
+		  			
+            <div class="button-container">
+                <button type="submit">Salvar</button>
+
+                <button type="button" onclick="window.location.href='/aluno/form'">Cancelar</button>
+            </div>
+        </form>
+
+
+	</body>
+</html>
+	

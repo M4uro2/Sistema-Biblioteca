@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>listar alunos</title>
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+	<script src="/js/menu.js"></script>
+</head>
+<body>
+    <div th:insert="fragments/barraNavegacao :: navbar"></div>
+
+    <h1>LISTAR ALUNO</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Matrícula</th>
+                <th>Data de Nascimento</th>
+                <th>CRE</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="aluno : ${alunos}">
+                <td th:text="${aluno.nome}"></td>
+                <td th:text="${aluno.matricula}"></td>
+                <td th:text="${#dates.format(aluno.dataNascimento, 'dd/MM/yyyy')}"></td>
+                <td th:text="${aluno.CRE}"></td>
+                <td>
+                    <a th:href="@{'/aluno/edit/' + ${aluno.id}}">Editar</a> |
+                    <a th:href="@{'/aluno/delete/' + ${aluno.id}}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+</table>
+
+</body>
+</html>
