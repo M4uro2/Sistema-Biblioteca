@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>listar alunos</title>
+    <title>Listar Alunos</title>
     <link rel="stylesheet" th:href="@{/css/menu.css}">
-	<script src="/js/menu.js"></script>
+    <script src="/js/menu.js"></script>
 </head>
 <body>
     <div th:insert="fragments/barraNavegacao :: navbar"></div>
@@ -16,25 +16,30 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Matrícula</th>
+                <th>Email</th>
+                <th>Série</th>
+                <th>Turma</th>
                 <th>Data de Nascimento</th>
-                <th>CRE</th>
+                <th>Telefone</th>
+                <th>Carteirinha</th>
                 <th>Ações</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="aluno : ${alunos}">
                 <td th:text="${aluno.nome}"></td>
-                <td th:text="${aluno.matricula}"></td>
+                <td th:text="${aluno.email}"></td>
+                <td th:text="${aluno.serie}"></td>
+                <td th:text="${aluno.turma}"></td>
                 <td th:text="${#dates.format(aluno.dataNascimento, 'dd/MM/yyyy')}"></td>
-                <td th:text="${aluno.CRE}"></td>
+                <td th:text="${aluno.telefone}"></td>
+                <td th:text="${aluno.carteirinha != null ? aluno.carteirinha.numero : 'Sem carteirinha'}"></td>
                 <td>
                     <a th:href="@{'/aluno/edit/' + ${aluno.id}}">Editar</a> |
                     <a th:href="@{'/aluno/delete/' + ${aluno.id}}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
                 </td>
             </tr>
         </tbody>
-</table>
-
+    </table>
 </body>
 </html>

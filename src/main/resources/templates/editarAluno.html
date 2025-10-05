@@ -21,10 +21,8 @@
 		<!--formulário de cadastro-->
 		<form th:action="@{/aluno/edit}" th:object="${aluno}" method="post">
             <br>
-
-           
+       
             <input type="hidden" id="idId" th:field="*{id}" />
-			<input type="hidden" id="id_dados" th:field="*{dados.id}" />
             <br>
 
 			<div th:insert= "fragments/formAluno :: formAluno"></div>

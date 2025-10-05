@@ -18,8 +18,7 @@ public class CarteirinhaService {
 	protected CarteirinhaRepository carteirinhaRepository;
 	
 	public Carteirinha save(Carteirinha a) {
-		return carteirinhaRepository.save(a);
-		
+		return carteirinhaRepository.save(a);	
 	}
 
 	public List<Carteirinha> findAll() {
@@ -27,7 +26,8 @@ public class CarteirinhaService {
 	}
 
 	public Carteirinha findById(Long id) {
-		return carteirinhaRepository.findById(id).orElseThrow(() -> new RuntimeException("carteirinha não encontrado"));
+		return carteirinhaRepository.findById(id)
+			.orElseThrow(() -> new RuntimeException("carteirinha não encontrado"));
 	}
 
 	public void deleteById(Long id) {

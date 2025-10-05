@@ -120,7 +120,5 @@ public class AlunoController {
 		alunoService.deleteById(id);
 		model.addAttribute("mensagemSucesso",  "deletado com sucesso!");
 		return listAlunos(model);
+	}
 }
-}
-// http://localhost:8080/aluno/save
-// http://localhost:8080/aluno/form

@@ -4,11 +4,13 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -27,8 +29,12 @@ public class Aluno {
 	@Column(unique = true, nullable = false)
 	private String email;
 	
+	@NotBlank(message = "A série do aluno é obrigatória")
+	@Column(nullable = false)
 	private String serie;
 	
+	@NotBlank(message = "A turma do aluno é obrigatória")
+	@Column(nullable = false)
 	private String turma;
 	
 	@NotNull(message = "A data de nascimento do aluno é obrigatória")
@@ -37,7 +43,12 @@ public class Aluno {
 	private Date dataNascimento;
 	
 	@Column(unique = true, nullable = false)
+	@NotBlank(message = "O telefone do aluno é obrigatório")
 	private String telefone;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	private Carteirinha carteirinha;
+	
 
 	public Long getId() {
 		return id;
@@ -94,6 +105,14 @@ public class Aluno {
 
 	public void setTurma(String turma) {
 		this.turma = turma;
+	}
+
+	public Carteirinha getCarteirinha() {
+		return carteirinha;
+	}
+
+	public void setCarteirinha(Carteirinha carteirinha) {
+		this.carteirinha = carteirinha;
 	}
 	
 	

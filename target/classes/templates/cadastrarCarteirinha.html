@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Cadastro Carteirinha</title>
+        <link rel="stylesheet" th:href="@{/css/menu.css}">
+        <script src="/js/menu.js"></script>
+    </head>
+    <body>
+        <!--barra de navegação-->
+        <div th:insert="fragments/barraNavegacao :: navbar"></div>
+        
+        <br>
+        
+        <div class="form-header">
+            <h1>Cadastro de Carteirinha</h1>
+        </div>
+        <br>
+        
+        <!--formulário de cadastro-->
+        <form th:action="@{/carteirinha/save}" th:object="${carteirinha}" method="post">
+            <br>
+
+            <label for="idAluno">Aluno*:</label>
+            <select id="idAluno" th:field="*{aluno}" required>
+                <option value="">--</option>
+                <option th:each="a : ${alunos}"
+                   th:value="${a.id}"
+                   th:text="${a.nome}"></option>
+                </option>
+            </select>
+
+            <br>
+            <div th:insert="fragments/formCarteirinha :: formCarteirinha"></div>
+            
+            <div class="button-container">
+                <button type="submit">Salvar</button>
+                <button type="button" onclick="window.location.href='/carteirinha/form'">Cancelar</button>
+            </div>
+        </form>
+    </body>
+</html>

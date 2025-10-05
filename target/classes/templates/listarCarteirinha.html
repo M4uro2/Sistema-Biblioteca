@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Carteirinhas</title>
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+    <script src="/js/menu.js"></script>
+</head>
+<body>
+    <div th:insert="fragments/barraNavegacao :: navbar"></div>
+
+    <h1>LISTAR CARTEIRINHA</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Número</th>
+                <th>Data de Emissão</th>
+                <th>Validade</th>
+                <th>Status</th>
+                <th>Aluno</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="carteirinha : ${carteirinhas}">
+                <td th:text="${carteirinha.numero}"></td>
+                <td th:text="${#dates.format(carteirinha.dataEmissao, 'dd/MM/yyyy')}"></td>
+                <td th:text="${#dates.format(carteirinha.validade, 'dd/MM/yyyy')}"></td>
+                <td th:text="${carteirinha.status}"></td>
+                <td th:text="${carteirinha.aluno.nome}"></td>
+                <td>
+                    <a th:href="@{'/carteirinha/edit/' + ${carteirinha.id}}">Editar</a> |
+                    <a th:href="@{'/carteirinha/delete/' + ${carteirinha.id}}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -2,11 +2,15 @@ package br.edu.ifpb.academico.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "emprestimos")
@@ -16,14 +20,27 @@ public class Emprestimo {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@NotNull(message = "A data de empréstimo não pode ser nula")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "dataEmprestimo", nullable = false)
 	private Date dataEmprestimo;
 	
+	@NotNull(message = "A data de devolução prevista não pode ser nula")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "dataDevolucaoPrevista", nullable = false)
 	private Date dataDevolucaoPrevista;
 	
+	@NotNull(message = "A data de devolução real não pode ser nula")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "dataDevolucaoReal", nullable = false)
 	private Date dataDevolucaoReal;
-	
+
+	@NotNull(message = "O status do empréstimo não pode ser nulo")
+	@Column(nullable = false)
 	private String status;
 	
+	@NotNull(message = "O livro emprestado não pode ser nulo")
+	@Column(nullable = false)
 	private String livro;
 
 	public Long getId() {

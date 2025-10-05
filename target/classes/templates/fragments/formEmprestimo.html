@@ -8,31 +8,31 @@
 <body>
 
     <div th:fragment="formEmprestimo" class="form">
-        
-            <label for="idNome">Data de emprestimo:</label>
-            <input type="text" id="idNome" th:field="*{dataEmprestimo}" placeholder="Informe o seu nome" required/>
-            <br>
+        <label for="dataEmprestimo">Data de empréstimo:</label>
+        <input type="date" id="dataEmprestimo" th:field="*{dataEmprestimo}" placeholder="Informe a data de empréstimo" required/>
+        <br>
 
-            <label for="idMatricula">Data de devolução prevista:</label>
-            <input type="text" id="idMatricula" th:field="*{dataDevolucaoPrevista}" placeholder="Informe sua matrícula" required/>
-            <br>
+        <label for="dataDevolucaoPrevista">Data de devolução prevista:</label>
+        <input type="date" id="dataDevolucaoPrevista" th:field="*{dataDevolucaoPrevista}" placeholder="Informe a data de devolução prevista" required/>
+        <br>
 
-            <label for="idCRE">Data de devolução real:</label>
-            <input type="number" id="idCRE" th:field="*{dataDevolucaoReal}" placeholder="Informe seu CRE" required/>
-            <br>
+        <label for="dataDevolucaoReal">Data de devolução real:</label>
+        <input type="date" id="dataDevolucaoReal" th:field="*{dataDevolucaoReal}" placeholder="Informe a data de devolução real" required/>
+        <br>
 
-            <label for="idDataNascimento">Status:</label>
-            <input type="date" id="idDataNascimento" th:field="*{status}" placeholder="Informe sua data de Nascimento" required/>
-            <br>
-            
-            <label for="idDataNascimento">Livro:</label>
-            <input type="date" id="idDataNascimento" th:field="*{livro}" placeholder="Informe sua data de Nascimento" required/>
-            <br>
-	        
+        <label for="status">Status:</label>
+        <select id="status" th:field="*{status}" required>
+            <option value="" disabled selected>Selecione o status</option>
+            <option value="ATIVO">Ativo</option>
+            <option value="DEVOLVIDO">Devolvido</option>
+            <option value="ATRASADO">Atrasado</option>
+        </select>
+        <br>
 
-			<hr>
+        <label for="livro">Livro:</label>
+        <input type="text" id="livro" th:field="*{livro}" placeholder="Informe o livro" required/>
+        <br>
 
-            
     </div>
     
 </body>

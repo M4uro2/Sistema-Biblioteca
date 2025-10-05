@@ -54,7 +54,11 @@ public class AlunoService {
 	 */
 	public boolean existsByEmail(String aluno) {
 		return alunoRepository.existsByEmail(aluno);
-}
+ 	}
+
+	public List<Aluno> findAlunosSemCarteirinha() {
+			return alunoRepository.findByCarteirinhaIsNull();
+		}
 
 	
 }

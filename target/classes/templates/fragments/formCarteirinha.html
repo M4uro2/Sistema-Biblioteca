@@ -8,7 +8,7 @@
 <body>
 
     <div th:fragment="formCarteirinha" class="form">
-        
+<br>
             <label for="idNumero">numero da carteirinha:</label>
             <input type="text" id="idNumero" th:field="*{numero}" placeholder="Informe o numero de sua carteirinha" required/>
             <br>
@@ -17,13 +17,18 @@
             <input type="date" id="idataEmissa" th:field="*{dataEmissao}" placeholder="Informe a data de Emissão" required/>
             <br>
 
-            <label for="idDataValidade">validae:</label>
-            <input type="date" id="idDataValidade" th:field="*{dataNascimento}" placeholder="Informe sua data de Nascimento" required/>
+            <label for="idDataValidade">validade:</label>
+            <input type="date" id="idDataValidade" th:field="*{validade}" placeholder="Informe sua data de Validade" required/>
             <br>
-	        
 
-			
-            
+            <label for="idStatus">Status:</label>
+                <select id="idStatus" th:field="*{status}" required>
+                    <option value="" disabled selected>Selecione o status</option>
+                    <option value="ATIVO">Ativo</option>
+                    <option value="BLOQUEADO">Bloqueado</option>
+                    <option value="PERDIDO">Perdido</option>
+                </select>
+
     </div>
     
 </body>

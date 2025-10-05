@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div th:fragment="formAluno" class="form">
+        
+            <label for="idNome">Nome:</label>
+            <input type="text" id="idNome" th:field="*{nome}" placeholder="Informe o seu nome" required/>
+            <br>
+
+            <label for="idEmail">Email:</label>
+            <input type="email" id="idEmail" th:field="*{email}" placeholder="Informe seu email" required/>
+            <br>
+
+            <label for="idTelefone">Telefone:</label>
+            <input type="text" id="idTelefone" th:field="*{telefone}" placeholder="Informe seu telefone" required/>
+            <br>
+
+            <label for="idDataNascimento">Data de nascimento:</label>
+            <input type="date" id="idDataNascimento" th:field="*{dataNascimento}" placeholder="Informe sua data de Nascimento" required/>
+            <br>
+
+            <label for="idSerie">Série:</label>
+            <input type="text" id="idSerie" th:field="*{serie}" placeholder="Informe sua série" required/>
+            <br>
+
+            <label for="idTurma">Turma:</label>
+            <input type="text" id="idTurma" th:field="*{turma}" placeholder="Informe sua turma" required/>
+            <br>
+    </div>
+    
+</body>
+</html>
