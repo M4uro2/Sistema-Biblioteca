@@ -1,5 +1,7 @@
 package br.edu.ifpb.academico.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import br.edu.ifpb.academico.entity.Aluno;
 import br.edu.ifpb.academico.entity.Emprestimo;
+import br.edu.ifpb.academico.service.AlunoService;
 import br.edu.ifpb.academico.service.EmprestimoService;
 
 @Controller
@@ -18,12 +23,22 @@ public class EmprestimoController {
 		@Autowired
 		protected EmprestimoService emprestimoService;
 
+		@Autowired
+		protected AlunoService alunoService;
+
 		@GetMapping("/form")
 		public String home(Model model) {
+			alunos(model);
 			model.addAttribute("emprestimo", new Emprestimo());
 			return "cadastrarEmprestimo";
 		}
 		
+        private void alunos(Model model) {
+			List<Aluno> alunos = alunoService.findAll();
+			model.addAttribute("alunos", alunos);
+			
+		}
+
 		@PostMapping("save")
 		public String saveEmprestimo(@ModelAttribute Emprestimo emprestimo, Model model) {	
 			if (emprestimoService.existsByLivro(emprestimo.getLivro())) {
@@ -38,6 +53,7 @@ public class EmprestimoController {
 
 		@GetMapping("/edit/{id}")
 		public String editEmprestimo(@PathVariable Long id, Model model) {
+			alunos(model);
 			Emprestimo emprestimo = emprestimoService.findById(id);
 			model.addAttribute("emprestimo", emprestimo);
 			return "editarEmprestimo";

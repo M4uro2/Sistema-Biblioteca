@@ -32,6 +32,32 @@
 
                 <button type="button" onclick="window.location.href='/aluno/list'">Cancelar</button>
             </div>
+            <br> 
+            <h2>Cursos Associados:</h2>
+    
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>livro</th>
+                    <th>Data de emprestimo</th>
+                    <th>data de vencimento</th>
+                    <th>status</th>
+                    <th>Ações</th>			
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="emprestimo : *{emprestimos}">
+                    <td th:text="${emprestimo.livro}"></td> <!-- livro -->
+                    <td th:text="${#dates.format(emprestimo.dataEmprestimo, 'dd/MM/yyyy')}"></td> <!-- Data de emprestimo -->
+                    <td th:text="${#dates.format(emprestimo.dataDevolucaoPrevista, 'dd/MM/yyyy')}"></td> <!-- data de vencimento -->
+                    <td th:text="${emprestimo.status}"></td> <!-- status -->
+                    <td>
+                        <a th:href="@{'/curso/edit/' + ${emprestimo.id}}">Editar</a> |
+                        <a th:href="@{'/curso/delete/' + ${emprestimo.id}}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         </form>
 
 </body>

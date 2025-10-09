@@ -1,15 +1,18 @@
 package br.edu.ifpb.academico.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -48,6 +51,11 @@ public class Aluno {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	private Carteirinha carteirinha;
+
+	@OneToMany(
+			fetch = FetchType.LAZY,
+			mappedBy = "aluno")
+	private List<Emprestimo> emprestimos;
 	
 
 	public Long getId() {
@@ -114,9 +122,13 @@ public class Aluno {
 	public void setCarteirinha(Carteirinha carteirinha) {
 		this.carteirinha = carteirinha;
 	}
-	
-	
-	
-	
+
+	public List<Emprestimo> getEmprestimos() {
+		return emprestimos;
+	}
+
+	public void setEmprestimos(List<Emprestimo> emprestimos) {
+		this.emprestimos = emprestimos;
+	}
 
 }

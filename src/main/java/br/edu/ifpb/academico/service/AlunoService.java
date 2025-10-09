@@ -60,5 +60,10 @@ public class AlunoService {
 			return alunoRepository.findByCarteirinhaIsNull();
 		}
 
+	// retorna um aluno com seus empréstimos associados
+	public Aluno findByIdWithEmprestimos(Long id) {
+		return alunoRepository.findByIdWithEmprestimos(id);
+	}
+
 	
 }

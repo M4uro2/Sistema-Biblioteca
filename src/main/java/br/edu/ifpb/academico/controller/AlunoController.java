@@ -1,6 +1,8 @@
 package br.edu.ifpb.academico.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import br.edu.ifpb.academico.entity.Aluno;
+import br.edu.ifpb.academico.entity.Emprestimo;
 import br.edu.ifpb.academico.service.AlunoService;
 
 /** 
@@ -70,7 +74,7 @@ public class AlunoController {
 	 */
 	@GetMapping("/edit/{id}")
 	public String editAluno(@PathVariable Long id, Model model) {
-		Aluno aluno = alunoService.findById(id);
+		Aluno aluno = alunoService.findByIdWithEmprestimos(id);
 		model.addAttribute("aluno", aluno);
 		return "editarAluno";
 	}
@@ -117,8 +121,17 @@ public class AlunoController {
 	 */
 	@GetMapping("/delete/{id}")
 	public String deleteAluno(@PathVariable Long id, Model model) {
-		alunoService.deleteById(id);
-		model.addAttribute("mensagemSucesso",  "deletado com sucesso!");
-		return listAlunos(model);
+		List<Emprestimo> emprestimos = alunoService.findByIdWithEmprestimos(id).getEmprestimos();
+		if (emprestimos != null && !emprestimos.isEmpty()) {
+			model.addAttribute("mensagemErro", "Aluno não pode ser deletado, pois possui empréstimos associados.");
+			model.addAttribute("emprestimos", emprestimos);
+			return listAlunos(model);
+		}
+		else {
+			alunoService.deleteById(id);
+			model.addAttribute("mensagemSucesso", "Aluno removido com sucesso");
+			model.addAttribute("emprestimos", emprestimos);
+			return listAlunos(model);
+		}
 	}
 }

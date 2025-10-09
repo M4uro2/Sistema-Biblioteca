@@ -4,11 +4,14 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -42,6 +45,12 @@ public class Emprestimo {
 	@NotNull(message = "O livro emprestado não pode ser nulo")
 	@Column(nullable = false)
 	private String livro;
+
+	@ManyToOne(
+			cascade = CascadeType.ALL,
+			fetch = FetchType.EAGER,
+			optional = false)
+	private Aluno aluno;
 
 	public Long getId() {
 		return id;
@@ -89,6 +98,14 @@ public class Emprestimo {
 
 	public void setLivro(String livro) {
 		this.livro = livro;
+	}
+
+	public Aluno getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
 	}
 	
 	
