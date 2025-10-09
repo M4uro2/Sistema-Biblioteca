@@ -33,8 +33,8 @@
                 <td th:text="${emprestimo.status}"></td>
                 <td th:text="${emprestimo.livro}"></td>
                 <td>
-                    <a th:href="@{'/emprestimo/edit/' + ${emprestimo.id}}">Editar</a> |
-                    <a th:href="@{'/emprestimo/delete/' + ${emprestimo.id}}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                    <a class="editar" th:href="@{'/emprestimo/edit/' + ${emprestimo.id}}">Editar</a> |
+                    <a class="excluir" th:href="@{'/emprestimo/delete/' + ${emprestimo.id}}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
                 </td>
             </tr>
         </tbody>

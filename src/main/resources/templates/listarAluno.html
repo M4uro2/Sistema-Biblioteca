@@ -35,8 +35,8 @@
                 <td th:text="${aluno.telefone}"></td>
                 <td th:text="${aluno.carteirinha != null ? aluno.carteirinha.numero : 'Sem carteirinha'}"></td>
                 <td>
-                    <a th:href="@{'/aluno/edit/' + ${aluno.id}}">Editar</a> |
-                    <a th:href="@{'/aluno/delete/' + ${aluno.id}}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                    <a class="editar" th:href="@{'/aluno/edit/' + ${aluno.id}}">Editar</a> |
+                    <a class="excluir" th:href="@{'/aluno/delete/' + ${aluno.id}}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
                 </td>
             </tr>
         </tbody>

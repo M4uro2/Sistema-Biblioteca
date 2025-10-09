@@ -1,5 +1,6 @@
 package br.edu.ifpb.academico.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +62,8 @@ public class EmprestimoController {
 		
 		@GetMapping("list")
 		public String listEmprestimos(Model model) {
-			model.addAttribute("emprestimos", emprestimoService.findAll());
+			List<Emprestimo> emprestimos = emprestimoService.findAll();
+			model.addAttribute("emprestimos", emprestimos);
 			return "listarEmprestimo";
 		}
 
@@ -88,5 +90,3 @@ public class EmprestimoController {
 }
 	// http://localhost:8080/aluno/save
 	// http://localhost:8080/aluno/form
-
-

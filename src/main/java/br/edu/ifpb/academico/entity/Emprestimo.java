@@ -107,9 +107,5 @@ public class Emprestimo {
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
-	
-	
-	 	
-	
 
 }
