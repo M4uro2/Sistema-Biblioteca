@@ -19,6 +19,11 @@ h1{
   margin : 10px 0px 10px 0px; 
 }
 
+footer{
+	position: fixed;
+	bottom: 0;
+}
+
 .button1{
   background-color: #21ce11ff;
   border: none;

@@ -47,7 +47,7 @@ public class Emprestimo {
 	private String livro;
 
 	@ManyToOne(
-			cascade = CascadeType.ALL,
+			
 			fetch = FetchType.EAGER,
 			optional = false)
 	private Aluno aluno;

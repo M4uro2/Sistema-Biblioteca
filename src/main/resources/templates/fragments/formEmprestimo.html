@@ -9,7 +9,7 @@
 
     <div th:fragment="formEmprestimo" class="form">
         <label for="idAluno">Aluno:</label>
-        <select id="idAluno" th:field="*{aluno}">
+        <select required id="idAluno" th:field="*{aluno}">
            <option value="">--</option>
            <option th:each="a : ${alunos}"
                    th:value="${a.id}"

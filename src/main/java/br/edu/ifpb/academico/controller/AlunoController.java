@@ -73,7 +73,7 @@ public class AlunoController {
 	 * @return A view de edição de aluno.
 	 */
 	@GetMapping("/edit/{id}")
-	public String editAluno(@PathVariable Long id, Model model) {
+	public String editAluno(@PathVariable("id") Long id, Model model) {
 		Aluno aluno = alunoService.findByIdWithEmprestimos(id);
 		model.addAttribute("aluno", aluno);
 		return "editarAluno";
@@ -120,7 +120,7 @@ public class AlunoController {
 	 * @return A view de listagem de alunos com mensagem de sucesso ou erro.
 	 */
 	@GetMapping("/delete/{id}")
-	public String deleteAluno(@PathVariable Long id, Model model) {
+	public String deleteAluno(@PathVariable("id") Long id, Model model) {
 		List<Emprestimo> emprestimos = alunoService.findByIdWithEmprestimos(id).getEmprestimos();
 		if (emprestimos != null && !emprestimos.isEmpty()) {
 			model.addAttribute("mensagemErro", "Aluno não pode ser deletado, pois possui empréstimos associados.");

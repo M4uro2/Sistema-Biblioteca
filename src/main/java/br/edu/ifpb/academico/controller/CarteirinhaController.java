@@ -65,7 +65,7 @@ public class CarteirinhaController {
 
 
 	@GetMapping("/edit/{id}")
-	public String editEmprestimo(@PathVariable Long id, Model model) {
+	public String editCarterinha(@PathVariable("id") Long id, Model model) {
 		alunos(model);
 		Carteirinha carteirinha = carteirinhaService.findById(id);
 		model.addAttribute("carteirinha", carteirinha);
@@ -118,7 +118,7 @@ public class CarteirinhaController {
 	
 	
 	@GetMapping("/delete/{id}")
-	public String deleteCarteirinha(@PathVariable Long id, Model model) {
+	public String deleteAluno(@PathVariable("id") Long id, Model model) {
 		Carteirinha carteirinha = carteirinhaService.findById(id);
 		if (carteirinha != null && carteirinha.getAluno() != null) {
 			Aluno aluno = carteirinha.getAluno();

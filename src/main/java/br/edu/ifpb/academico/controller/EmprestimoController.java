@@ -53,7 +53,7 @@ public class EmprestimoController {
 		}
 
 		@GetMapping("/edit/{id}")
-		public String editEmprestimo(@PathVariable Long id, Model model) {
+		public String editEmprestimo(@PathVariable("id") Long id, Model model) {
 			alunos(model);
 			Emprestimo emprestimo = emprestimoService.findById(id);
 			model.addAttribute("emprestimo", emprestimo);
@@ -82,7 +82,7 @@ public class EmprestimoController {
 		}
 		
 		@GetMapping("/delete/{id}")
-		public String deleteEmprestimo(@PathVariable Long id, Model model) {
+		public String deleteEmprestimo(@PathVariable("id") Long id, Model model) {
 			emprestimoService.deleteById(id);
 			model.addAttribute("mensagemSucesso",  "deletado com sucesso!");
 			return listEmprestimos(model);
