@@ -42,6 +42,16 @@ public class CarteirinhaController {
         alunos(model); // Recarrega a lista de alunos para o formulário
         return "cadastrarCarteirinha";
     }
+		// Verifica se a data de validade é maior que à data de emissão
+		
+		if (carteirinha.getValidade().before(carteirinha.getDataEmissao())) {
+		model.addAttribute("mensagemErro", "A data de validade deve ser maior que a data de emissão.");
+		alunos(model); // Recarrega a lista de alunos para o formulário
+		return "cadastrarCarteirinha";
+	}
+		
+	
+		
     // 2. Busca o aluno selecionado no formulário
     Aluno aluno = alunoService.findById(carteirinha.getAluno().getId());
     if (aluno.getCarteirinha() != null) {
@@ -65,7 +75,7 @@ public class CarteirinhaController {
 
 
 	@GetMapping("/edit/{id}")
-	public String editEmprestimo(@PathVariable Long id, Model model) {
+	public String editCarterinha(@PathVariable("id") Long id, Model model) {
 		alunos(model);
 		Carteirinha carteirinha = carteirinhaService.findById(id);
 		model.addAttribute("carteirinha", carteirinha);
@@ -89,6 +99,15 @@ public class CarteirinhaController {
 			model.addAttribute("mensagemErro", "Carteirinha não encontrada.");
 			return listCarteirinha(model);
 		}
+		
+		if (carteirinha.getValidade().before(carteirinha.getDataEmissao())) {
+			model.addAttribute("mensagemErro", "A data de validade deve ser maior que a data de emissão.");
+			alunos(model); // Recarrega a lista de alunos para o formulário
+			return "editarCarteirinha";
+		}
+		
+		
+			
 		// Verifica se o número está sendo alterado para um já existente
 		if (!carteirinhaExistente.getNumero().equals(carteirinha.getNumero()) && carteirinhaService.existsByNumero(carteirinha.getNumero())) {
 			model.addAttribute("mensagemErro", "Carteirinha do número " + carteirinha.getNumero() + " já existe.");
@@ -100,6 +119,7 @@ public class CarteirinhaController {
 			alunoAnterior.setCarteirinha(null);
 			alunoService.save(alunoAnterior);
 		}
+		
 		// Atualiza os campos da carteirinha
 		carteirinhaExistente.setNumero(carteirinha.getNumero());
 		carteirinhaExistente.setDataEmissao(carteirinha.getDataEmissao());
@@ -118,8 +138,11 @@ public class CarteirinhaController {
 	
 	
 	@GetMapping("/delete/{id}")
-	public String deleteCarteirinha(@PathVariable Long id, Model model) {
+	public String deleteAluno(@PathVariable("id") Long id, Model model) {
 		Carteirinha carteirinha = carteirinhaService.findById(id);
+		
+		
+		
 		if (carteirinha != null && carteirinha.getAluno() != null) {
 			Aluno aluno = carteirinha.getAluno();
 			aluno.setCarteirinha(null); // desvincula a carteirinha do aluno

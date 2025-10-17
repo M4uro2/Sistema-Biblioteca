@@ -1,5 +1,6 @@
 package br.edu.ifpb.academico.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,15 +45,39 @@ public class EmprestimoController {
 			if (emprestimoService.existsByLivro(emprestimo.getLivro())) {
 				model.addAttribute("mensagemErro", "Emprestimo do livro " + emprestimo.getLivro() + " já cadastrado.");
 				return "cadastrarEmprestimo";
-			} else {			
+			} 
+			
+			if (emprestimo.getDataDevolucaoReal().before(emprestimo.getDataEmprestimo())) {
+				model.addAttribute("mensagemErro", "A data de emprestimo deve ser menor que a data de devolução real.");
+				alunos(model); // Recarrega a lista de alunos para o formulário
+				return "cadastrarEmprestimo";
+			}
+			
+			if (emprestimo.getDataDevolucaoPrevista().before(emprestimo.getDataEmprestimo())) {
+				model.addAttribute("mensagemErro", "A data de emprestimo deve ser menor que a data de devolução prevista.");
+				alunos(model); // Recarrega a lista de alunos para o formulário
+				return "cadastrarEmprestimo";
+			}
+			
+			if (emprestimo.getDataDevolucaoPrevista().before(emprestimo.getDataEmprestimo()) && emprestimo.getDataDevolucaoReal().before(emprestimo.getDataEmprestimo())) {
+				model.addAttribute("mensagemErro", "A data de emprestimo deve ser menor que as datas de devoluções.");
+				alunos(model); // Recarrega a lista de alunos para o formulário
+				return "cadastrarEmprestimo";
+			}
+			
+			else {			
 				emprestimoService.save(emprestimo);
 			}
+				
+			
+			
+			
 			model.addAttribute("mensagemSucesso", "Emprestimo do livro " + emprestimo.getLivro() + " cadastrado com sucesso!");
 			return "cadastrarEmprestimo";
 		}
 
 		@GetMapping("/edit/{id}")
-		public String editEmprestimo(@PathVariable Long id, Model model) {
+		public String editEmprestimo(@PathVariable("id") Long id, Model model) {
 			alunos(model);
 			Emprestimo emprestimo = emprestimoService.findById(id);
 			model.addAttribute("emprestimo", emprestimo);
@@ -61,7 +86,8 @@ public class EmprestimoController {
 		
 		@GetMapping("list")
 		public String listEmprestimos(Model model) {
-			model.addAttribute("emprestimos", emprestimoService.findAll());
+			List<Emprestimo> emprestimos = emprestimoService.findAll();
+			model.addAttribute("emprestimos", emprestimos);
 			return "listarEmprestimo";
 		}
 
@@ -71,7 +97,27 @@ public class EmprestimoController {
 			if((!emprestimoService.findById(emprestimo.getId()).getLivro().equals(emprestimo.getLivro())) && emprestimoService.existsByLivro(emprestimo.getLivro())) {
 				model.addAttribute("mensagemErro", "Empestimo com livro " + emprestimo.getLivro() + " já existe.");
 				return listEmprestimos(model);
-			}else {
+			}
+			
+			if (emprestimo.getDataDevolucaoReal().before(emprestimo.getDataEmprestimo())) {
+				model.addAttribute("mensagemErro", "A data de emprestimo deve ser menor que a data de devolução real.");
+				alunos(model); // Recarrega a lista de alunos para o formulário
+				return "editarEmprestimo";
+			}
+			
+			if (emprestimo.getDataDevolucaoPrevista().before(emprestimo.getDataEmprestimo())) {
+				model.addAttribute("mensagemErro", "A data de emprestimo deve ser menor que a data de devolução prevista.");
+				alunos(model); // Recarrega a lista de alunos para o formulário
+				return "editarEmprestimo";
+			}
+			
+			if (emprestimo.getDataDevolucaoPrevista().before(emprestimo.getDataEmprestimo()) && emprestimo.getDataDevolucaoReal().before(emprestimo.getDataEmprestimo())) {
+				model.addAttribute("mensagemErro", "A data de emprestimo deve ser menor que as datas de devoluções.");
+				alunos(model); // Recarrega a lista de alunos para o formulário
+				return "editarEmprestimo";
+			}
+			
+			else {
 			emprestimoService.save(emprestimo);
 			}
 			model.addAttribute("mensagemSucesso", "Emprestimo com livro " + emprestimo.getLivro() + " atualizado com sucesso!");
@@ -80,7 +126,7 @@ public class EmprestimoController {
 		}
 		
 		@GetMapping("/delete/{id}")
-		public String deleteEmprestimo(@PathVariable Long id, Model model) {
+		public String deleteEmprestimo(@PathVariable("id") Long id, Model model) {
 			emprestimoService.deleteById(id);
 			model.addAttribute("mensagemSucesso",  "deletado com sucesso!");
 			return listEmprestimos(model);
@@ -88,5 +134,3 @@ public class EmprestimoController {
 }
 	// http://localhost:8080/aluno/save
 	// http://localhost:8080/aluno/form
-
-

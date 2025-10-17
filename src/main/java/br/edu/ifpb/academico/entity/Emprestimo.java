@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -106,9 +105,5 @@ public class Emprestimo {
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
-	
-	
-	 	
-	
 
 }

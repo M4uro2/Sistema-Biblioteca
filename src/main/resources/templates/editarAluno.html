@@ -28,9 +28,9 @@
 			<div th:insert= "fragments/formAluno :: formAluno"></div>
 
             <div class="button-container">
-                <button type="submit">Salvar</button>
+                <button class="button1" type="submit">Salvar</button>
 
-                <button type="button" onclick="window.location.href='/aluno/list'">Cancelar</button>
+                <button class="button2" type="button" onclick="window.location.href='/aluno/list'">Cancelar</button>
             </div>
             <br> 
             <h2>Cursos Associados:</h2>
@@ -52,8 +52,8 @@
                     <td th:text="${#dates.format(emprestimo.dataDevolucaoPrevista, 'dd/MM/yyyy')}"></td> <!-- data de vencimento -->
                     <td th:text="${emprestimo.status}"></td> <!-- status -->
                     <td>
-                        <a th:href="@{'/curso/edit/' + ${emprestimo.id}}">Editar</a> |
-                        <a th:href="@{'/curso/delete/' + ${emprestimo.id}}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                        <a class="editar" th:href="@{'/curso/edit/' + ${emprestimo.id}}">Editar</a> |
+                        <a class="excluir" th:href="@{'/curso/delete/' + ${emprestimo.id}}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
                     </td>
                 </tr>
             </tbody>
