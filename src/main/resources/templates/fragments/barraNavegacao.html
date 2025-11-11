@@ -46,6 +46,37 @@
 					<!-- links para listar -->
 					<a th:href="@{/emprestimo/list}">Listar</a>
 				</div>
+
+				
+				<!-- menu de usuario-->
+				<button class="dropdown-btn">
+					Usuarios &#x25BC;
+				</button>
+				<div class="dropdown-container">
+					
+					<!-- links para cadastrar-->
+					<a th:href="@{/usuario/form}">Cadastrar</a> 
+					
+					<!-- links para listar-->
+					<a	th:href="@{/usuario/list}">Listar</a>
+				</div>
+
+				<!-- menu de roles-->
+				<button class="dropdown-btn">
+					Roles &#x25BC;
+				</button>
+				<div class="dropdown-container">
+					
+					<!-- links para cadastrar-->
+					<a th:href="@{/role/form}">Cadastrar</a> 
+					
+					<!-- links para listar-->
+					<a	th:href="@{/role/list}">Listar</a>
+				</div>
+
+				<form th:action="@{/logout}" method="post">
+	 				<button type="submit">Sair</button>
+				</form>
 		 </div>
 
 		 <script src="/js/menu.js"></script>
