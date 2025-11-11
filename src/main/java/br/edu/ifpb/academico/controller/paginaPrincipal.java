@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class paginaPrincipal {
 
 
-	@GetMapping("")
+	@GetMapping("/paginaPrincipal")
 	public String paginaPrincipal(Model model) {
 		return "paginaPrincipal";
 	}
