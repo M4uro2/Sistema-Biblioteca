@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>listar alunos</title>
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+	<script src="/js/menu.js"></script>
+</head>
+<body>
+    <div th:insert="fragments/barraNavegacao :: navbar"></div>
+
+    <h1>LISTAR ALUNO</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="role : ${roles}">
+                <td th:text="${role.role}"></td>
+                <td>
+                    <a th:href="@{'/role/edit/' + ${role.id}}">Editar</a> |
+                    <a th:href="@{'/role/delete/' + ${role.id}}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+</table>
+
+</body>
+</html>
