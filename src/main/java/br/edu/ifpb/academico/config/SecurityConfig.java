@@ -18,11 +18,11 @@ public class SecurityConfig {
            http.authorizeHttpRequests(auth -> auth
                .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
                .requestMatchers("/login").permitAll()
-               .requestMatchers("/paginaPrincipal").permitAll()
+               .requestMatchers("/paginaPrincipal").hasAnyRole("ALUNO", "ADMIN")
                .requestMatchers("/emprestimo/**").hasAnyRole("ALUNO", "ADMIN")
-               .requestMatchers("/carteirinha/**").hasAnyRole("ADMIN")
-               .requestMatchers("/aluno/**").hasAnyRole("ADMIN")
-               .requestMatchers("/usuario/**").hasAnyRole("ADMIN")
+               .requestMatchers("/carteirinha/**").hasRole("ADMIN")
+               .requestMatchers("/aluno/**").hasRole("ADMIN")
+               .requestMatchers("/usuario/**").hasRole("ADMIN")
                .requestMatchers("/role/**").hasRole("ADMIN")
 
 

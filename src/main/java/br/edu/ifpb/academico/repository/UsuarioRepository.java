@@ -11,6 +11,7 @@ import br.edu.ifpb.academico.entity.*;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     boolean existsByMatricula(String matricula);
+    boolean existsByEmail(String email);
     Optional<Usuario> findByLogin(String login);
 }
 

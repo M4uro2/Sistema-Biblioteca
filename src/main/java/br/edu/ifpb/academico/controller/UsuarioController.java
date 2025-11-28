@@ -45,13 +45,18 @@ public class UsuarioController {
 		// Verifica se o usuário já existe pela matrícula
 		if (usuarioService.existsByMatricula(usuario.getMatricula())) {
 			model.addAttribute("mensagemErro", "Usuário com matrícula " + usuario.getMatricula() + " já cadastrado.");
-			return "cadastrarUsuario";
-		} else {
+			return home(model);
+		}
+		if(usuarioService.existsByEmail(usuario.getEmail())){
+			model.addAttribute("mensagemErro", "Usuário com Email " + usuario.getEmail() + " já cadastrado.");
+			return home(model);
+		}
+		 else {
 			usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 			usuarioService.save(usuario);
 		}
 		model.addAttribute("mensagemSucesso", "Usuário com matrícula " + usuario.getMatricula() + " cadastrado com sucesso!");
-		return "cadastrarUsuario";
+		return home(model);
 	}
 
     @GetMapping("/edit/{id}")
@@ -68,14 +73,17 @@ public class UsuarioController {
 		if((!usuarioService.findById(usuario.getId()).getMatricula().equals(usuario.getMatricula())) && usuarioService.existsByMatricula(usuario.getMatricula())) {
 			model.addAttribute("mensagemErro", "Usuário com matrícula " + usuario.getMatricula() + " já existe.");
 			return listUsuarios(model);
-		}else {
+		}
+		if((!usuarioService.findById(usuario.getId()).getEmail().equals(usuario.getEmail())) && usuarioService.existsByEmail(usuario.getEmail())) {
+			model.addAttribute("mensagemErro", "Usuário com Email " + usuario.getEmail() + " já existe.");
+			return listUsuarios(model);
+		}
+		else {
 		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 		usuarioService.save(usuario);
 		}
-
-		model.addAttribute("mensagemSucesso", "Usuário com matrícula " + usuario.getMatricula() + " atualizado com sucesso!");
+		model.addAttribute("mensagemSucesso", "Usuário com Email " + usuario.getEmail() + " atualizado com sucesso!");
 		return listUsuarios(model);
-
 	}
 
     @GetMapping("list")

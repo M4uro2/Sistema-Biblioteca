@@ -42,6 +42,10 @@ public class UsuarioService implements UserDetailsService{
 		return usuarioRepository.existsByMatricula(matricula);
 	}
 
+	public boolean existsByEmail(String email) {
+		return usuarioRepository.existsByEmail(email);
+	}
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
