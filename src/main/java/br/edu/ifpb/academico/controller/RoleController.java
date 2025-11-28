@@ -45,7 +45,7 @@ public class RoleController {
     @GetMapping("/edit/{id}")
     public String editRole(@PathVariable Long id, Model model) {
         Role role = roleService.findById(id);
-        model.addAttribute("role", role);
+        model.addAttribute("roleObj", role);
         return "editarRole";
     }
 

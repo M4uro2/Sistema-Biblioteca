@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.expression.WebExpressionAuthorizationManager;
 
 @Configuration
 @EnableWebSecurity
@@ -14,8 +15,18 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-       http.authorizeHttpRequests(auth -> auth
-               .anyRequest().authenticated() // permite tudo
+           http.authorizeHttpRequests(auth -> auth
+               .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
+               .requestMatchers("/login").permitAll()
+               .requestMatchers("/paginaPrincipal").permitAll()
+               .requestMatchers("/emprestimo/**").hasAnyRole("ALUNO", "ADMIN")
+               .requestMatchers("/carteirinha/**").hasAnyRole("ADMIN")
+               .requestMatchers("/aluno/**").hasAnyRole("ADMIN")
+               .requestMatchers("/usuario/**").hasAnyRole("ADMIN")
+               .requestMatchers("/role/**").hasRole("ADMIN")
+
+
+               .anyRequest().access(new WebExpressionAuthorizationManager("isAuthenticated() and !hasRole('ALUNO')"))
            ).formLogin(
        		form -> form
                .loginPage("/login")

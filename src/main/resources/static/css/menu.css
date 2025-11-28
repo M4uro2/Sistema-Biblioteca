@@ -23,7 +23,24 @@ footer{
 	position: fixed;
 	bottom: 0;
 }
-
+.button_sair{
+  background-color: #97423fff;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: auto;
+  margin-left: 50px;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: 0.3s ease;
+}
+.button_sair:hover{
+  background-color: #ac2b27ff;
+}
 .button1{
   background-color: #21ce11ff;
   border: none;
@@ -177,12 +194,15 @@ td{
   
   color: white;
 }
-
+.dropdown-btn {
+  transition: 0.3s;
+  color: white;
+}
 .dropdown-container {
   display: none;
-  
   background-color: #000000ff; /* Um marrom um pouco mais claro que o principal */
   padding-left: 8px;
+  transition: 0.3s;
 }
 
 @media screen and (max-height: 450px) {

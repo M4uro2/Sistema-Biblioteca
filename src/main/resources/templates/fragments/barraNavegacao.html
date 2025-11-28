@@ -8,7 +8,7 @@
 <body>
    <div th:fragment="navbar" class="menu">
 		<div class="sidenav">
-				<a href="/">Início</a>
+				<a href="/paginaPrincipal">Início</a>
 				
 			<!-- menu de campus -->
 				<button class="dropdown-btn">
@@ -75,7 +75,7 @@
 				</div>
 
 				<form th:action="@{/logout}" method="post">
-	 				<button type="submit">Sair</button>
+	 				<button class="button_sair" type="submit">Sair</button>
 				</form>
 		 </div>
 
